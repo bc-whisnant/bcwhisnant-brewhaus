@@ -23,9 +23,7 @@ defineProps({
 
 <template>
   <div class="brewery-card">
-    <div class="brewery-type">
-      <h4>{{ breweryType }}</h4>
-    </div>
+    <span>{{ breweryType }}</span>
     <div class="brewery-name">
       <h3>{{ breweryName }}</h3>
     </div>
@@ -47,5 +45,11 @@ defineProps({
 .brewery-card:hover {
   cursor: pointer;
   border: 3px solid var(--med-beer);
+}
+
+.brewery-card span {
+  padding: 4px 12px;
+  background-color: var(--med-beer);
+  border-radius: 4px;
 }
 </style>
