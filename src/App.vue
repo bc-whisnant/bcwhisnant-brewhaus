@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia';
 import { useBreweriesStore } from './stores/breweries';
 import Heading from './components/Heading.vue'
 import Brewery from './components/Brewery.vue';
+import NoResults from './components/NoResults.vue';
 
 const breweriesStore = useBreweriesStore()
 const { breweries } = storeToRefs(breweriesStore)
@@ -13,12 +14,16 @@ const searchIsActive = ref(false)
 const filteredBreweries = ref([])
 
 const filterBreweriesFromSearch = (term) => {
-  if (term !== '') {
+  if (term.trim() !== '') {
+      searchTerm.value = term
       searchIsActive.value = true
       filteredBreweries.value = breweries.value.filter(brewery => 
     brewery.name.toLowerCase().includes(term.toLowerCase()))
   } else {
-    searchTerm.value = term
+   // reset values so data is accurate
+    searchTerm.value = ''
+    searchIsActive.value = false
+    filteredBreweries.value = []
   }
 }
 
@@ -38,10 +43,11 @@ onBeforeMount(async () => {
 <template>
   <div class="app-container varela-round-regular ">
     <Heading :searchTerm="searchTerm" @emitSearch="filterBreweriesFromSearch" />
-    <div class="brewery-container">
+    <div v-if="breweriesToDispay.length" class="brewery-container">
       <Brewery v-for="brewery in breweriesToDispay" :key="brewery.id" :breweryType="brewery.brewery_type"
         :breweryName="brewery.name" :breweryCity="brewery.city" :breweryState="brewery.state" />
     </div>
+    <NoResults v-else />
   </div>
 </template>
 
