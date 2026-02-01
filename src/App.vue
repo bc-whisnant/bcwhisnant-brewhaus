@@ -8,6 +8,14 @@ import Brewery from './components/Brewery.vue';
 const breweriesStore = useBreweriesStore()
 const { breweries } = storeToRefs(breweriesStore)
 
+const searchTerm = ref('')
+const filteredBreweries = ref([])
+
+const filterBreweriesFromSearch = (term) => {
+  searchTerm.value = term
+}
+
+
 onBeforeMount(async () => {
   await breweriesStore.fetchBreweries()
 })
@@ -15,7 +23,7 @@ onBeforeMount(async () => {
 
 <template>
   <div class="app-container varela-round-regular ">
-    <Heading />
+    <Heading :searchTerm="searchTerm" @emitSearch="filterBreweriesFromSearch" />
     <div class="brewery-container">
       <Brewery v-for="brewery in breweries" :key="brewery.id" :breweryType="brewery.brewery_type"
         :breweryName="brewery.name" :breweryCity="brewery.city" :breweryState="brewery.state" />

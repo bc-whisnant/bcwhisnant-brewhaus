@@ -1,4 +1,12 @@
-<script setup></script>
+<script setup>
+const searchTerm = defineModel()
+
+const emits = defineEmits(['emitSearch'])
+
+const emitOnSearch = (term) => {
+  emits('emitSearch', term)
+} 
+</script>
 
 <template>
   <header>
@@ -8,12 +16,9 @@
       </span>
       <h1>BrewHaus</h1>
     </div>
-    <form class="heading-search">
-      <input type="text" class="search-input" placeholder="Enter a name" />
-      <button type="submit" class="search-button">
-        <span>Search</span>
-      </button>
-    </form>
+    <div class="heading-search">
+      <input v-model="searchTerm" @input="emitOnSearch(searchTerm)" type="text" class="search-input" placeholder="Enter a name to search..." />
+    </div>
   </header>
 </template>
 
@@ -49,20 +54,5 @@ header {
 .search-input:focus-visible {
   outline: var(--light-beer) auto 1px;
   
-}
-
-.search-button {
-  padding: 15px 35px;
-  background: var(--med-beer);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 </style>
