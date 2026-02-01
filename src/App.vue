@@ -1,26 +1,92 @@
 <script setup>
 import Heading from './components/Heading.vue'
+import Brewery from './components/Brewery.vue';
+
+const breweryTesting = [
+  {
+    "id": "ef970757-fe42-416f-931d-722451f1f59c",
+    "name": "10 Barrel Brewing Co",
+    "brewery_type": "large",
+    "address_1": "1501 E St",
+    "address_2": null,
+    "address_3": null,
+    "city": "San Diego",
+    "state_province": "California",
+    "postal_code": "92101-6618",
+    "country": "United States",
+    "longitude": -117.129593,
+    "latitude": 32.714813,
+    "phone": "6195782311",
+    "website_url": "http:\/\/10barrel.com",
+    "state": "California",
+    "street": "1501 E St"
+  },
+  {
+    "id": "5fdcc498-f9df-4fa5-b35d-487a59f0fecc",
+    "name": "2Kids Brewing Company",
+    "brewery_type": "micro",
+    "address_1": "8680 Miralani Dr Ste 123",
+    "address_2": null,
+    "address_3": null,
+    "city": "San Diego",
+    "state_province": "California",
+    "postal_code": "92126-6391",
+    "country": "United States",
+    "longitude": -117.137429,
+    "latitude": 32.896584,
+    "phone": "8584805437",
+    "website_url": "http:\/\/www.2kidsBrewing.com",
+    "state": "California",
+    "street": "8680 Miralani Dr Ste 123"
+  },
+  {
+    "id": "5fdcc498-f9df-4fa5-b35d-487a59f0fecc",
+    "name": "2Kids Brewing Company",
+    "brewery_type": "micro",
+    "address_1": "8680 Miralani Dr Ste 123",
+    "address_2": null,
+    "address_3": null,
+    "city": "San Diego",
+    "state_province": "California",
+    "postal_code": "92126-6391",
+    "country": "United States",
+    "longitude": -117.137429,
+    "latitude": 32.896584,
+    "phone": "8584805437",
+    "website_url": "http:\/\/www.2kidsBrewing.com",
+    "state": "California",
+    "street": "8680 Miralani Dr Ste 123"
+  }
+]
 </script>
 
 <template>
   <div class="app-container varela-round-regular ">
     <Heading />
+    <div class="brewery-container">
+      <Brewery v-for="brewery in breweryTesting" :key="brewery.id" :breweryType="brewery.brewery_type"
+        :breweryName="brewery.name" :breweryCity="brewery.city" :breweryState="brewery.state" />
+    </div>
   </div>
 </template>
 
 <style scoped>
-
 .app-container {
   max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+  margin: 0 auto;
+  padding: 20px;
 }
+
 .varela-round-regular {
   font-family: "Varela Round", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
 
+/* brewery container */
+.brewery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 25px;
+}
 </style>
-
- 

@@ -9,7 +9,7 @@
       <h1>BrewHaus</h1>
     </div>
     <form class="heading-search">
-      <input type="text" class="search-input" placeholder="Enter a city name to find a brewery near you">
+      <input type="text" class="search-input" placeholder="Enter a name" />
       <button type="submit" class="search-button">
         <span>Search</span>
       </button>
@@ -18,6 +18,9 @@
 </template>
 
 <style scoped>
+header {
+  margin-bottom: 15px;
+}
 .heading {
   display: flex;
   align-items: center;
@@ -30,22 +33,27 @@
 
 .heading-search {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   margin-top: 20px;
 }
 
 .search-input {
   flex: 1;
   padding: 15px 20px;
-  border: 3px solid #fbbf24;
+  border: 3px solid var(--med-beer);
   border-radius: 10px;
   font-size: 1rem;
   background: white;
 }
 
+.search-input:focus-visible {
+  outline: var(--light-beer) auto 1px;
+  
+}
+
 .search-button {
   padding: 15px 35px;
-  background: #f59e0b;
+  background: var(--med-beer);
   color: white;
   border: none;
   border-radius: 10px;
