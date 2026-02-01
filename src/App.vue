@@ -9,12 +9,26 @@ const breweriesStore = useBreweriesStore()
 const { breweries } = storeToRefs(breweriesStore)
 
 const searchTerm = ref('')
+const searchIsActive = ref(false)
 const filteredBreweries = ref([])
 
 const filterBreweriesFromSearch = (term) => {
-  searchTerm.value = term
+  if (term !== '') {
+      searchIsActive.value = true
+      filteredBreweries.value = breweries.value.filter(brewery => 
+    brewery.name.toLowerCase().includes(term.toLowerCase()))
+  } else {
+    searchTerm.value = term
+  }
 }
 
+const breweriesToDispay = computed(() => {
+  if (searchIsActive.value) {
+    return filteredBreweries.value
+  } else {
+    return breweries.value
+  }
+})
 
 onBeforeMount(async () => {
   await breweriesStore.fetchBreweries()
@@ -25,7 +39,7 @@ onBeforeMount(async () => {
   <div class="app-container varela-round-regular ">
     <Heading :searchTerm="searchTerm" @emitSearch="filterBreweriesFromSearch" />
     <div class="brewery-container">
-      <Brewery v-for="brewery in breweries" :key="brewery.id" :breweryType="brewery.brewery_type"
+      <Brewery v-for="brewery in breweriesToDispay" :key="brewery.id" :breweryType="brewery.brewery_type"
         :breweryName="brewery.name" :breweryCity="brewery.city" :breweryState="brewery.state" />
     </div>
   </div>
