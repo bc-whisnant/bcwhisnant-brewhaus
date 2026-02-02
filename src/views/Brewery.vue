@@ -17,9 +17,14 @@ const currentBrewery = computed(() => breweries.value.find(brewery => brewery.id
       :selectedBreweryStreet="currentBrewery.street" :selectedBreweryCity="currentBrewery.city" :selectedBreweryState="currentBrewery.state"
       :selectedBreweryPhone="currentBrewery.phone" :selectedBrewerySite="currentBrewery.website_url" />
   </div>
-  <div v-else>
+  <div v-else class="no-brewery-found">
     <p>No brewery found. Please go back and search again.</p>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.no-brewery-found {
+  display: flex;
+  justify-content: center;
+}
+</style>
