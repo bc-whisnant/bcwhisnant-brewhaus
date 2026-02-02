@@ -5,6 +5,7 @@ import { useBreweriesStore } from './stores/breweries'
 import Heading from './components/Heading.vue'
 import Brewery from './components/Brewery.vue'
 import NoResults from './components/NoResults.vue'
+import Pagination from './components/Pagination.vue'
 
 const breweriesStore = useBreweriesStore()
 const { breweries } = storeToRefs(breweriesStore)
@@ -58,13 +59,16 @@ onBeforeMount(async () => {
       <NoResults />
     </div>
     <div v-if="totalPages > 1 && !searchIsActive" class="app-pagination">
-      <vue-awesome-paginate :total-items="totalCount" :items-per-page="itemsPerPage" :max-pages-shown="10"
+      <Pagination :totalCount="totalCount" :itemsPerPage="itemsPerPage" :maxPagesShown="10"
         v-model="currentPage" />
+
+      <!-- <vue-awesome-paginate :totalCount="totalCount" :itemsPerPage="itemsPerPage" :maxPagesShown="10"
+        v-model="currentPage" /> -->
     </div>
   </div>
 </template>
 
-<style>
+<style scoped>
 .app-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -84,34 +88,10 @@ onBeforeMount(async () => {
   gap: 25px;
 }
 
-/* pagination */
+/* pagination container */
 .app-pagination {
   margin-top: 15px;
   display: flex;
   justify-content: center;
-}
-
-.pagination-container {
-  display: flex;
-  column-gap: 10px;
-}
-
-.paginate-buttons {
-  background-color: white !important;
-  height: 40px !important;
-  width: 40px !important;
-  border: 2px solid var(--med-beer);
-  border-radius: 50% !important;
-  padding: 10px;
-}
-
-.paginate-buttons:hover {
-  cursor: pointer;
-  background-color: white !important;
-  height: 40px !important;
-  width: 40px !important;
-  border: 2px solid var(--light-beer);
-  border-radius: 50% !important;
-  padding: 10px;
 }
 </style>
