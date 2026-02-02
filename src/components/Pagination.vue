@@ -59,4 +59,11 @@
   border: 2px solid var(--light-beer);
   border-radius: 50% !important;
   padding: 10px;
-}</style>
+}
+
+.paginate-buttons:focus-visible {
+  outline: var(--light-beer) auto 1px;
+}
+
+
+</style>

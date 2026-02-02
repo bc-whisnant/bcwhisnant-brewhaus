@@ -22,7 +22,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="brewery-card">
+  <div class="brewery-card" tabindex="0">
     <span>{{ breweryType }}</span>
     <div class="brewery-name">
       <h3>{{ breweryName }}</h3>
@@ -45,6 +45,10 @@ defineProps({
 .brewery-card:hover {
   cursor: pointer;
   border: 3px solid var(--med-beer);
+}
+
+.brewery-card:focus-visible {
+  outline: var(--med-beer) auto 1px;
 }
 
 .brewery-card span {
