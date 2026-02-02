@@ -94,6 +94,11 @@ onBeforeMount(async () => {
   color: black;
 }
 
+.individual-brewery:focus-visible {
+  outline: var(--med-beer) auto 1px;
+  border-radius: 15px;
+}
+
 /* pagination container */
 .app-pagination {
   margin-top: 15px;

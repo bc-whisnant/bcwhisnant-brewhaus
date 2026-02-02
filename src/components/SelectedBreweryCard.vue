@@ -3,11 +3,11 @@
 import Heading from './Heading.vue';
 
 defineProps({
- selectedBreweryType: {
+  selectedBreweryType: {
     type: String,
     required: true
   },
- selectedBreweryName: {
+  selectedBreweryName: {
     type: String,
     required: true
   },
@@ -23,11 +23,11 @@ defineProps({
     type: String,
     required: true
   },
- selectedBreweryPhone: {
+  selectedBreweryPhone: {
     type: String,
     required: true
   },
- selectedBrewerySite: {
+  selectedBrewerySite: {
     type: String,
     required: false
   }
@@ -43,10 +43,10 @@ defineProps({
       <h2>{{ selectedBreweryName }}</h2>
     </div>
     <div class="brewery-phone">
-      <h3>Phone: <a :href="'tel:'+`${selectedBreweryPhone}`">{{ selectedBreweryPhone }}</a></h3>
+      <h3>Phone: <a :href="'tel:' + `${selectedBreweryPhone}`">{{ selectedBreweryPhone }}</a></h3>
     </div>
     <div class="brewery-address">
-      <h4>Address: {{ selectedBreweryStreet }}, {{  selectedBreweryCity }}, {{ selectedBreweryState }}</h4>
+      <h4>Address: {{ selectedBreweryStreet }}, {{ selectedBreweryCity }}, {{ selectedBreweryState }}</h4>
     </div>
     <div class="brewery-site">
       Website: <a :href="selectedBrewerySite" target="_blank">{{ selectedBrewerySite }}</a>
@@ -56,10 +56,16 @@ defineProps({
 </template>
 
 <style scoped>
-  .brewery-phone a,
-  .brewery-site a {
-    cursor: pointer;
-    color: var(--med-beer);
-  }
-</style>
+.individual-brewery-card:focus-visible,
+.brewery-phone a:focus-visible,
+.brewery-site a:focus-visible {
+  outline: var(--med-beer) auto 1px;
+  border-radius: 2px;
+}
 
+.brewery-phone a,
+.brewery-site a {
+  cursor: pointer;
+  color: var(--med-beer);
+}
+</style>

@@ -22,7 +22,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="brewery-card" tabindex="0">
+  <div class="brewery-card">
     <span>{{ breweryType }}</span>
     <div class="brewery-name">
       <h3>{{ breweryName }}</h3>
