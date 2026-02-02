@@ -63,6 +63,14 @@
 .paginate-buttons:focus-visible {
   outline: var(--light-beer) auto 1px;
 }
+/* mainly for iphone */
+@media (max-width: 400px) {
+  .pagination-container {
+    justify-content: center;
+    column-gap: 2px;
+  }
+    
+}
 
 
 </style>
