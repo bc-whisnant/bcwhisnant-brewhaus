@@ -43,19 +43,20 @@ defineProps({
       <h2>{{ selectedBreweryName }}</h2>
     </div>
     <div class="brewery-phone">
-      <h3>{{ selectedBreweryPhone }}</h3>
+      <h3>Phone: <a :href="'tel:'+`${selectedBreweryPhone}`">{{ selectedBreweryPhone }}</a></h3>
     </div>
     <div class="brewery-address">
-      <h4>{{ selectedBreweryStreet }}, {{  selectedBreweryCity }}, {{ selectedBreweryState }}</h4>
+      <h4>Address: {{ selectedBreweryStreet }}, {{  selectedBreweryCity }}, {{ selectedBreweryState }}</h4>
     </div>
     <div class="brewery-site">
-      <a :href="selectedBrewerySite" target="_blank">{{ selectedBrewerySite }}</a>
+      Website: <a :href="selectedBrewerySite" target="_blank">{{ selectedBrewerySite }}</a>
     </div>
   </div>
 
 </template>
 
 <style scoped>
+  .brewery-phone a,
   .brewery-site a {
     cursor: pointer;
     color: var(--med-beer);

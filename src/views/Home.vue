@@ -15,7 +15,7 @@ const searchTerm = ref('')
 const searchIsActive = ref(false)
 const filteredBreweries = ref([])
 const currentPage = ref(1)
-const itemsPerPage = ref(9)
+const itemsPerPage = ref(8)
 
 const filterBreweriesFromSearch = (term) => {
   if (term.trim() !== '') {
