@@ -50,11 +50,14 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <div class="app-container varela-round-regular ">
-    <Heading :searchTerm="searchTerm" @emitSearch="filterBreweriesFromSearch" />
+  <div>
+    <Heading :searchIncluded="true" :searchTerm="searchTerm" @emitSearch="filterBreweriesFromSearch" />
     <div v-if="!breweriesLoading && breweriesToDispay.length" class="brewery-container">
-      <Brewery v-for="brewery in breweriesToDispay" :key="brewery.id" :breweryType="brewery.brewery_type"
-        :breweryName="brewery.name" :breweryCity="brewery.city" :breweryState="brewery.state" />
+      <router-link v-for="brewery in breweriesToDispay" :key="brewery.id"
+        :to="{ name: 'brewery', params: { id: brewery.id } }" class="individual-brewery">
+        <Brewery :breweryType="brewery.brewery_type" :breweryName="brewery.name" :breweryCity="brewery.city"
+          :breweryState="brewery.state" />
+      </router-link>
     </div>
     <div v-else-if="breweriesLoading || !breweriesToDispay.length" class="brewery-no-results">
       <NoData :appIsLoading="breweriesLoading" />
@@ -83,6 +86,12 @@ onBeforeMount(async () => {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 25px;
+}
+
+.individual-brewery,
+.individual-brewery:visited {
+  text-decoration: none;
+  color: black;
 }
 
 /* pagination container */

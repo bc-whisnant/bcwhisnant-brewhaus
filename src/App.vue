@@ -10,7 +10,7 @@
 .app-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 40px;
 }
 
 .varela-round-regular {

@@ -4,8 +4,7 @@
     const emits = defineEmits(['emitPaginationClick'])
 
     const paginationClick = (page) => {
-        console.log('page here', page)
-        emits('emitPaginationClick', page)
+      emits('emitPaginationClick', page)
     } 
     defineProps({
     totalCount: {

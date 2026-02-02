@@ -1,22 +1,31 @@
 <script setup>
+import { useRouter } from 'vue-router'
+
+defineProps({
+  searchIncluded: {
+    type: Boolean,
+    required: true
+  }
+})
 const searchTerm = defineModel()
-
+const router = useRouter()
 const emits = defineEmits(['emitSearch'])
-
 const emitOnSearch = (term) => {
   emits('emitSearch', term)
 } 
+
+const goHome = () => router.push('/')
 </script>
 
 <template>
   <header>
-    <div class="heading">
+    <div class="heading" @click="goHome">
       <span class="heading-icon">
         🍻
       </span>
       <h1>BrewHaus</h1>
     </div>
-    <div class="heading-search">
+    <div v-if="searchIncluded" class="heading-search">
       <input v-model="searchTerm" @input="emitOnSearch(searchTerm)" type="text" class="search-input" placeholder="Enter a name to search..." />
     </div>
   </header>
@@ -30,6 +39,7 @@ header {
   display: flex;
   align-items: center;
   gap: 15px;
+  cursor: pointer;
 }
 
 .heading-icon {
