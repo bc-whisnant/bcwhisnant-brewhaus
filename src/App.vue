@@ -4,11 +4,12 @@ import { storeToRefs } from 'pinia'
 import { useBreweriesStore } from './stores/breweries'
 import Heading from './components/Heading.vue'
 import Brewery from './components/Brewery.vue'
-import NoResults from './components/NoResults.vue'
+import NoData from './components/NoData.vue'
 import Pagination from './components/Pagination.vue'
 
 const breweriesStore = useBreweriesStore()
-const { breweries } = storeToRefs(breweriesStore)
+const { breweries, breweriesLoading } = storeToRefs(breweriesStore)
+
 
 const searchTerm = ref('')
 const searchIsActive = ref(false)
@@ -51,19 +52,16 @@ onBeforeMount(async () => {
 <template>
   <div class="app-container varela-round-regular ">
     <Heading :searchTerm="searchTerm" @emitSearch="filterBreweriesFromSearch" />
-    <div v-if="breweriesToDispay.length" class="brewery-container">
+    <div v-if="!breweriesLoading && breweriesToDispay.length" class="brewery-container">
       <Brewery v-for="brewery in breweriesToDispay" :key="brewery.id" :breweryType="brewery.brewery_type"
         :breweryName="brewery.name" :breweryCity="brewery.city" :breweryState="brewery.state" />
     </div>
-    <div v-else class="brewery-no-results">
-      <NoResults />
+    <div v-else-if="breweriesLoading || !breweriesToDispay.length" class="brewery-no-results">
+      <NoData :appIsLoading="breweriesLoading" />
     </div>
-    <div v-if="totalPages > 1 && !searchIsActive" class="app-pagination">
+    <div v-if="!breweriesLoading && totalPages > 1 && !searchIsActive" class="app-pagination">
       <Pagination :totalCount="totalCount" :itemsPerPage="itemsPerPage" :maxPagesShown="10"
         v-model="currentPage" />
-
-      <!-- <vue-awesome-paginate :totalCount="totalCount" :itemsPerPage="itemsPerPage" :maxPagesShown="10"
-        v-model="currentPage" /> -->
     </div>
   </div>
 </template>
