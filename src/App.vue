@@ -64,7 +64,7 @@ onBeforeMount(async () => {
   </div>
 </template>
 
-<style scoped>
+<style>
 .app-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -94,5 +94,24 @@ onBeforeMount(async () => {
 .pagination-container {
   display: flex;
   column-gap: 10px;
+}
+
+.paginate-buttons {
+  background-color: white !important;
+  height: 40px !important;
+  width: 40px !important;
+  border: 2px solid var(--med-beer);
+  border-radius: 50% !important;
+  padding: 10px;
+}
+
+.paginate-buttons:hover {
+  cursor: pointer;
+  background-color: white !important;
+  height: 40px !important;
+  width: 40px !important;
+  border: 2px solid var(--light-beer);
+  border-radius: 50% !important;
+  padding: 10px;
 }
 </style>
