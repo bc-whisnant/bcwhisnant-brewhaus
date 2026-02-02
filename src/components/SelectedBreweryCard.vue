@@ -37,41 +37,28 @@ defineProps({
 
 <template>
   <Heading :searchIncluded="false" />
-  <div class="individual-card" tabindex="0">
+  <div class="individual-brewery-card" tabindex="0">
     <span>{{ selectedBreweryType }}</span>
-    <div class="individual-name">
-      <h3>{{ selectedBreweryName }}</h3>
+    <div class="brewery-name">
+      <h2>{{ selectedBreweryName }}</h2>
     </div>
-    <div class="individual-phone">
+    <div class="brewery-phone">
       <h3>{{ selectedBreweryPhone }}</h3>
     </div>
-    <div class="individual-address">
-      {{ selectedBreweryStreet }}, {{  selectedBreweryCity }}, {{ selectedBreweryState }}
+    <div class="brewery-address">
+      <h4>{{ selectedBreweryStreet }}, {{  selectedBreweryCity }}, {{ selectedBreweryState }}</h4>
+    </div>
+    <div class="brewery-site">
+      <a :href="selectedBrewerySite" target="_blank">{{ selectedBrewerySite }}</a>
     </div>
   </div>
 
 </template>
 
 <style scoped>
-.brewery-card {
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-  border: 2px solid transparent;
-}
-
-.brewery-card:hover {
-  cursor: pointer;
-  border: 3px solid var(--med-beer);
-}
-
-.brewery-card:focus-visible {
-  outline: var(--med-beer) auto 1px;
-}
-
-.brewery-card span {
-  padding: 4px 12px;
-  background-color: var(--med-beer);
-  border-radius: 4px;
-}
+  .brewery-site a {
+    cursor: pointer;
+    color: var(--med-beer);
+  }
 </style>
+

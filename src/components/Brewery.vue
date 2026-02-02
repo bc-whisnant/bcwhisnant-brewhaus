@@ -33,27 +33,3 @@ defineProps({
   </div>
 
 </template>
-
-<style scoped>
-.brewery-card {
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-  border: 2px solid transparent;
-}
-
-.brewery-card:hover {
-  cursor: pointer;
-  border: 3px solid var(--med-beer);
-}
-
-.brewery-card:focus-visible {
-  outline: var(--med-beer) auto 1px;
-}
-
-.brewery-card span {
-  padding: 4px 12px;
-  background-color: var(--med-beer);
-  border-radius: 4px;
-}
-</style>
