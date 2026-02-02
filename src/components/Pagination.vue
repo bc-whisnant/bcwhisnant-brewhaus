@@ -9,15 +9,15 @@
     } 
     defineProps({
     totalCount: {
-        type: String,
+        type: Number,
         required: true
     },
     itemsPerPage: {
-        type: String,
+        type: Number,
         required: true
     },
     maxPagesShown: {
-        type: String,
+        type: Number,
         required: true
     }
     })
