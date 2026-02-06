@@ -8,28 +8,33 @@ import NoData from '../components/NoData.vue'
 import Pagination from '../components/Pagination.vue'
 
 const breweriesStore = useBreweriesStore()
-const { breweries, breweriesLoading } = storeToRefs(breweriesStore)
+const { breweries, breweriesLoading,
+  errorFetchingBreweries,
+  currentPage
+} = storeToRefs(breweriesStore)
 
 
 const searchTerm = ref('')
 const searchIsActive = ref(false)
 const filteredBreweries = ref([])
-const currentPage = ref(1)
 const itemsPerPage = ref(9)
 
-const filterBreweriesFromSearch = (term) => {
+const filterBreweriesFromSearch = async (term) => {
   if (term.trim() !== '') {
     searchTerm.value = term
     searchIsActive.value = true
-    filteredBreweries.value = breweries.value.filter(brewery =>
-      brewery.name.toLowerCase().includes(term.toLowerCase()))
-    currentPage.value = 1
+    filteredBreweries.value = await breweriesStore.fetchBreweriesBasedOnSearch(term)
+    updateCurrentPage(currentPage.value)
   } else {
     // reset values so data is accurate
     searchTerm.value = ''
     searchIsActive.value = false
     filteredBreweries.value = []
   }
+}
+
+const updateCurrentPage = (page) => {
+  breweriesStore.updatePagination(page)
 }
 
 const totalCount = computed(() => breweries.value.length);
@@ -44,8 +49,12 @@ const breweriesToDispay = computed(() => {
   }
 })
 
+
+
 onBeforeMount(async () => {
-  await breweriesStore.fetchBreweries()
+  if (!breweries.value.length) {
+    await breweriesStore.fetchBreweries()
+  }
 })
 </script>
 
@@ -65,6 +74,7 @@ onBeforeMount(async () => {
     <div v-if="!breweriesLoading && totalPages > 1 && !searchIsActive" class="app-pagination">
       <Pagination :totalCount="totalCount" :itemsPerPage="itemsPerPage" :maxPagesShown="10" v-model="currentPage" />
     </div>
+    <div v-if="errorFetchingBreweries">There was an error fetching breweries.</div>
   </div>
 </template>
 

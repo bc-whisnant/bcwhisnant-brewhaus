@@ -25,9 +25,12 @@ const goHome = () => router.push('/')
       </span>
       <h1>BrewHaus</h1>
     </div>
-    <div v-if="searchIncluded" class="heading-search">
-      <input v-model="searchTerm" @input="emitOnSearch(searchTerm)" type="text" class="search-input" placeholder="Enter a name to search..." />
-    </div>
+    <form @submit.prevent="emitOnSearch(searchTerm)" v-if="searchIncluded" class="heading-search">
+      <input v-model="searchTerm" type="text" class="search-input" placeholder="Enter a name to search..." />
+      <button type="submit" class="search-button" :disabled="!searchTerm">
+        <span>Search</span>
+      </button>
+    </form>
   </header>
 </template>
 
@@ -62,7 +65,29 @@ header {
 }
 
 .search-input:focus-visible {
-  outline: var(--light-beer) auto 1px;
-  
+  outline: var(--light-beer) auto 1px; 
+}
+
+.search-button {
+  padding: 15px 35px;
+  background: var(--med-beer);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+  border: 1px solid #aaa;
 }
 </style>
